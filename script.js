@@ -1,6 +1,6 @@
 function estimateCost() {
-  const area = document.getElementById('area').value;
-  const costPerSqft = 1500; // Example base rate
-  const total = area * costPerSqft;
+  const area = parseFloat(document.getElementById('area').value);
+  const ratePerSqft = 1650; // Tamil Nadu SOR-based example rate
+  const total = area * ratePerSqft;
   document.getElementById('output').innerText = `Estimated Cost: ₹${total.toLocaleString()}`;
 }
