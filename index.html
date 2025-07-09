@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Smart Builder</title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Smart Builder: Construction Cost Estimator</h1>
-    <label for="area">Enter Area (sqft):</label>
-    <input type="number" id="area" placeholder="e.g., 1200" />
-    <button onclick="estimateCost()">Estimate</button>
-    <div id="output" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
-  </div>
+  <h1>Smart Builder: Construction Cost Estimator</h1>
+  <label>Enter Area (sqft):</label>
+  <input type="text" placeholder="e.g., 1200">
+  <button>Estimate</button>
+
+  <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
+
   <script src="script.js"></script>
 </body>
 </html>
