@@ -1,2 +1,3 @@
-# Smart-Builder-
-Ai powerd construction cost estimator 
+# Smart Builder
+
+A construction estimation platform.
