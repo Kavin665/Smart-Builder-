@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Estimate - Smart Builder</title>
+</head>
+<body>
+  <h2>Estimate Page</h2>
+  <label for="area">Enter Area (sqft):</label>
+  <input type="number" id="area" />
+  <button onclick="calculateEstimate()">Estimate</button>
+  <p id="result"></p>
+
+  <script>
+    function calculateEstimate() {
+      const area = parseFloat(document.getElementById('area').value);
+      const rate = 1650;
+      if (!isNaN(area) && area > 0) {
+        const estimate = area * rate;
+        document.getElementById('result').textContent = `Estimated Cost: ₹${estimate.toLocaleString("en-IN")}`;
+      } else {
+        document.getElementById('result').textContent = "Please enter a valid area.";
+      }
+    }
+  </script>
+</body>
+</html>
