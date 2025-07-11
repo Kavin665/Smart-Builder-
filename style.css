@@ -8,7 +8,7 @@ body {
   background-color: white;
   padding: 2rem;
   border-radius: 10px;
-  max-width: 400px;
+  max-width: 600px;
   margin: auto;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -27,4 +27,12 @@ button {
 }
 button:hover {
   background-color: #005fa3;
+}
+table {
+  margin-top: 1rem;
+  width: 100%;
+}
+th, td {
+  padding: 0.5rem;
+  text-align: center;
 }
