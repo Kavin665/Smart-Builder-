@@ -5,32 +5,40 @@ function estimateCost() {
     return;
   }
 
-  const items = [
-    { name: "Cement", unit: "bags", rate: 395, qtyPerSqft: 0.4 },
-    { name: "Sand", unit: "cft", rate: 55, qtyPerSqft: 0.8 },
-    { name: "Steel", unit: "kg", rate: 63.5, qtyPerSqft: 2.5 },
-    { name: "Labour", unit: "₹/sqft", rate: 180, qtyPerSqft: 1 }
-  ];
+  const rates = {
+    cement: 395,
+    sand: 55,
+    steel: 63.5,
+    labour: 180
+  };
 
-  const tableBody = document.querySelector("#boq-table tbody");
-  tableBody.innerHTML = "";
+  const qty = {
+    cement: area * 0.4,
+    sand: area * 0.8,
+    steel: area * 2.5,
+    labour: area
+  };
 
-  let totalCost = 0;
-  items.forEach(item => {
-    const qty = item.qtyPerSqft * area;
-    const amount = qty * item.rate;
-    totalCost += amount;
+  const amounts = {
+    cement: qty.cement * rates.cement,
+    sand: qty.sand * rates.sand,
+    steel: qty.steel * rates.steel,
+    labour: qty.labour * rates.labour
+  };
 
-    const row = `<tr>
-      <td>${item.name}</td>
-      <td>${item.unit}</td>
-      <td>${qty.toFixed(2)}</td>
-      <td>${item.rate}</td>
-      <td>${amount.toLocaleString()}</td>
-    </tr>`;
-    tableBody.innerHTML += row;
-  });
+  const total = Object.values(amounts).reduce((acc, val) => acc + val, 0);
+  document.getElementById("totalCost").textContent = `Estimated cost: ₹${total.toLocaleString()}`;
 
-  document.getElementById("estimated-cost").textContent =
-    `Estimated cost: ₹${totalCost.toLocaleString()}`;
+  const boqHTML = `
+    <h3>BOQ Breakdown</h3>
+    <table>
+      <tr><th>Item</th><th>Unit</th><th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th></tr>
+      <tr><td>Cement</td><td>bags</td><td>${qty.cement.toFixed(2)}</td><td>${rates.cement}</td><td>${amounts.cement.toLocaleString()}</td></tr>
+      <tr><td>Sand</td><td>cft</td><td>${qty.sand.toFixed(2)}</td><td>${rates.sand}</td><td>${amounts.sand.toLocaleString()}</td></tr>
+      <tr><td>Steel</td><td>kg</td><td>${qty.steel.toFixed(2)}</td><td>${rates.steel}</td><td>${amounts.steel.toLocaleString()}</td></tr>
+      <tr><td>Labour</td><td>₹/sqft</td><td>${qty.labour.toFixed(2)}</td><td>${rates.labour}</td><td>${amounts.labour.toLocaleString()}</td></tr>
+    </table>
+  `;
+
+  document.getElementById("boqSection").innerHTML = boqHTML;
 }
