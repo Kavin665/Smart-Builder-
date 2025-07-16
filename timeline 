@@ -1,23 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Timeline - Smart Builder</title>
-  <link rel="stylesheet" href="../style.css" />
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Smart Builder – Timeline</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/frappe-gantt/dist/frappe-gantt.css">
+  <script src="https://cdn.jsdelivr.net/npm/frappe-gantt/dist/frappe-gantt.umd.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1>Smart Builder</h1>
-    <nav>
-      <a href="../index.html">Home</a> |
-      <a href="valuation.html">Valuation</a> |
-      <a href="timeline.html">Timeline</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Timeline Page</h2>
-    <p>Construction phase tracking, weekly goals, and project completion timeline will appear here.</p>
-  </main>
+<body class="bg-gray-100 text-gray-900 p-4">
+  <h1 class="text-2xl font-bold mb-4">Project Timeline</h1>
+  <div id="gantt"></div>
+  <script src="timeline.js"></script>
 </body>
 </html>
