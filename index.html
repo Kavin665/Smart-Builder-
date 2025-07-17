@@ -1,70 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Smart Builder – Home Estimator</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Builder – BOQ Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 font-sans">
-  <div class="max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-xl mt-12">
-    <h1 class="text-3xl font-bold text-center mb-6 text-indigo-700">🏗️ Smart Builder</h1>
-
-    <div class="space-y-4">
-      <div>
-        <label class="block mb-1 font-medium">📍 Location</label>
-        <select id="location" class="w-full p-2 border rounded">
-          <option value="TN">Tamil Nadu</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium">📐 Area (in sqft)</label>
-        <input type="number" id="area" placeholder="e.g., 1200" class="w-full p-2 border rounded" />
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium">🏠 Home Type</label>
-        <select id="type" class="w-full p-2 border rounded">
-          <option value="1BHK">1 BHK</option>
-          <option value="2BHK">2 BHK</option>
-          <option value="3BHK">3 BHK</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-medium">⚒️ Construction Quality</label>
-        <select id="quality" class="w-full p-2 border rounded">
-          <option value="basic">Basic</option>
-          <option value="standard">Standard</option>
-          <option value="premium">Premium</option>
-        </select>
-      </div>
-
-      <button onclick="calculateEstimate()" class="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition">
-        💸 Estimate My Home Cost
-      </button>
-
-      <div id="result" class="text-xl font-bold text-center text-green-600 mt-4"></div>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-gray-100">
+  <header class="p-4 bg-white dark:bg-gray-900 shadow flex justify-between">
+    <h1 class="text-2xl font-bold">BOQ Generator</h1>
+    <button id="dark-mode-toggle" class="px-3 py-1 border rounded">Toggle Dark</button>
+  </header>
+  <main class="p-4 max-w-4xl mx-auto">
+    <div class="flex space-x-2 mb-4">
+      <button id="add-category" class="bg-green-600 text-white px-4 py-2 rounded">+ Category</button>
+      <button id="export-pdf" class="bg-blue-600 text-white px-4 py-2 rounded">Export PDF</button>
+      <button id="export-xlsx" class="bg-blue-500 text-white px-4 py-2 rounded">Export Excel</button>
     </div>
-  </div>
-
-  <script>
-    function calculateEstimate() {
-      const area = parseFloat(document.getElementById('area').value);
-      const quality = document.getElementById('quality').value;
-
-      let rate = 0;
-      if (quality === 'basic') rate = 1400;
-      else if (quality === 'standard') rate = 1700;
-      else if (quality === 'premium') rate = 2000;
-
-      if (!isNaN(area)) {
-        const cost = area * rate;
-        document.getElementById('result').innerText = `Estimated Cost: ₹${cost.toLocaleString()}`;
-      } else {
-        document.getElementById('result').innerText = `Enter a valid area.`;
-      }
-    }
-  </script>
+    <div id="boq-container" class="overflow-x-auto bg-white dark:bg-gray-900 rounded shadow">
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <th class="px-3 py-2 text-left">Category</th>
+            <th class="px-3 py-2 text-left">Description</th>
+            <th class="px-3 py-2">Qty</th>
+            <th class="px-3 py-2">Unit</th>
+            <th class="px-3 py-2">Rate (₹)</th>
+            <th class="px-3 py-2">Tax (%)</th>
+            <th class="px-3 py-2">Total (₹)</th>
+            <th class="px-3 py-2">Remove</th>
+          </tr>
+        </thead>
+        <tbody id="boq-body" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <!-- Dynamic rows here -->
+        </tbody>
+        <tfoot class="bg-gray-50 dark:bg-gray-800">
+          <tr>
+            <td colspan="6" class="px-3 py-2 font-semibold text-right">Grand Total:</td>
+            <td class="px-3 py-2 font-bold">₹<span id="grand-total">0.00</span></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </main>
+  <!-- Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
